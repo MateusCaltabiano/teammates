@@ -58,14 +58,14 @@ public class UserProvisionTest extends BaseLogicTest {
 
          ______TS("student");
 
-        StudentAttributes student = dataBundle.students.get("student5InCourse2");
+        student = dataBundle.students.get("student5InCourse2");
         user = userProvision.getCurrentUser(new UserInfoCookie(student.getGoogleId()));
         assertEquals(student.getGoogleId(), user.id);
         assertFalse(user.isAdmin);
         assertFalse(user.isInstructor);
         assertTrue(user.isStudent);
 
-        ______TS("unregistered")
+        ______TS("unregistered");
 
         user = userProvision.getCurrentUser(new UserInfoCookie("unknown"));
         assertEquals("unknown", user.id);
@@ -77,7 +77,7 @@ public class UserProvisionTest extends BaseLogicTest {
 
         ______TS("student");
 
-        StudentAttributes student = dataBundle.students.get("student3InCourse6");
+        student = dataBundle.students.get("student3InCourse6");
         user = userProvision.getCurrentUser(new UserInfoCookie(student.getGoogleId()));
         assertEquals(student.getGoogleId(), user.id);
         assertFalse(user.isAdmin);
@@ -86,21 +86,20 @@ public class UserProvisionTest extends BaseLogicTest {
 
         ______TS("student");
 
-        StudentAttributes student = dataBundle.students.get("student1InCourse1");
+        student = dataBundle.students.get("student1InCourse1");
         user = userProvision.getCurrentUser(new UserInfoCookie("unknown"));
-        assertEquals(unknown, user.id);
+        assertEquals("unknown", user.id);
         assertFalse(user.isAdmin);
         assertFalse(user.isInstructor);
         assertTrue(user.isStudent);
 
         ______TS("instructor");
 
-        InstructorAttributes instructor = dataBundle.instructors.get("instructor1OfCourse1");
-        UserInfo user = userProvision.getCurrentUser(new UserInfoCookie("unknown"));
+        instructor = dataBundle.instructors.get("instructor1OfCourse1");
+        user = userProvision.getCurrentUser(new UserInfoCookie("unknown"));
         assertEquals("unknown", user.id);
         assertFalse(user.isAdmin);
         assertTrue(user.isInstructor);
         assertFalse(user.isStudent);
     }
-
 }
