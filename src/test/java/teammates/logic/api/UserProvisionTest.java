@@ -55,6 +55,52 @@ public class UserProvisionTest extends BaseLogicTest {
 
         // check for user not logged in
         assertNull(userProvision.getCurrentUser(null));
+
+         ______TS("student");
+
+        StudentAttributes student = dataBundle.students.get("student5InCourse2");
+        user = userProvision.getCurrentUser(new UserInfoCookie(student.getGoogleId()));
+        assertEquals(student.getGoogleId(), user.id);
+        assertFalse(user.isAdmin);
+        assertFalse(user.isInstructor);
+        assertTrue(user.isStudent);
+
+        ______TS("unregistered")
+
+        user = userProvision.getCurrentUser(new UserInfoCookie("unknown"));
+        assertEquals("unknown", user.id);
+        assertFalse(user.isAdmin);
+        assertFalse(user.isInstructor);
+        assertFalse(user.isStudent);
+
+        assertNull(userProvision.getCurrentUser(null));
+
+        ______TS("student");
+
+        StudentAttributes student = dataBundle.students.get("student3InCourse6");
+        user = userProvision.getCurrentUser(new UserInfoCookie(student.getGoogleId()));
+        assertEquals(student.getGoogleId(), user.id);
+        assertFalse(user.isAdmin);
+        assertFalse(user.isInstructor);
+        assertTrue(user.isStudent);
+
+        ______TS("student");
+
+        StudentAttributes student = dataBundle.students.get("student1InCourse1");
+        user = userProvision.getCurrentUser(new UserInfoCookie("unknown"));
+        assertEquals(unknown, user.id);
+        assertFalse(user.isAdmin);
+        assertFalse(user.isInstructor);
+        assertTrue(user.isStudent);
+
+        ______TS("instructor");
+
+        InstructorAttributes instructor = dataBundle.instructors.get("instructor1OfCourse1");
+        UserInfo user = userProvision.getCurrentUser(new UserInfoCookie("unknown"));
+        assertEquals("unknown", user.id);
+        assertFalse(user.isAdmin);
+        assertTrue(user.isInstructor);
+        assertFalse(user.isStudent);
     }
 
 }
