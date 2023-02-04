@@ -218,4 +218,20 @@ public class StringHelperTest extends BaseTestCase {
         assertFalse(StringHelper.isCorrectSignature(null, signature));
         assertFalse(StringHelper.isCorrectSignature(invalid, signature));
     }
+    
+    @Test
+	public void areLetterAfterDotsUpperCase() {
+		assertEquals(false, StringHelper.isTextPadronized("Testando.teste de texto."));
+	}
+	
+	@Test
+	public void areThereSpacesAfterDots() {
+		assertEquals(false, StringHelper.isTextPadronized("Testando.Teste de texto"));
+	}
+	
+	@Test
+	public void doesTheTestEndWithPunctuation() {
+		assertEquals(false, StringHelper.isTextPadronized("Testando. Teste de texto"));
+	}
+    
 }
