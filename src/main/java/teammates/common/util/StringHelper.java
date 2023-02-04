@@ -62,6 +62,41 @@ public final class StringHelper {
     public static String getIndent(int length) {
         return generateStringOfLength(length, ' ');
     }
+    
+    /**
+    * Checks if punctuations and upper sized letters are correct in a text
+    */ 
+    
+    public static boolean isTextPadronized(String text) {
+		int aux = 1;
+		for(int i = 0; i < text.length(); i++) {
+			if(text.charAt(i) == '.') {
+				if(text.charAt(i+1) != ' ') {
+					return false;
+				}
+				
+				if(text.charAt(i+2) == 'a' || text.charAt(i+2) == 'b' || text.charAt(i+2) == 'c' || 
+				   text.charAt(i+2) == 'd' || text.charAt(i+2) == 'e' || text.charAt(i+2) == 'f' || 
+				   text.charAt(i+2) == 'g' || text.charAt(i+2) == 'h' || text.charAt(i+2) == 'i' || 
+				   text.charAt(i+2) == 'j' || text.charAt(i+2) == 'k' || text.charAt(i+2) == 'l' || 
+				   text.charAt(i+2) == 'm' || text.charAt(i+2) == 'n' || text.charAt(i+2) == 'o' || 
+				   text.charAt(i+2) == 'p' || text.charAt(i+2) == 'q' || text.charAt(i+2) == 'r' || 
+				   text.charAt(i+2) == 's' || text.charAt(i+2) == 't' || text.charAt(i+2) == 'u' || 
+				   text.charAt(i+2) == 'v' || text.charAt(i+2) == 'w' || text.charAt(i+2) == 'x' || 
+				   text.charAt(i+2) == 'y' || text.charAt(i+2) == 'z') {
+					   aux = 0;
+				}
+			}
+		}
+		if(aux == 0) {
+			return false;
+		}
+		if(text.charAt(text.length()-1) != '.' || text.charAt(text.length()-1) != '!' ||
+		   text.charAt(text.length()-1) != '?') {
+			return false;
+		}
+		return true;
+	}
 
     /**
      * Trims head of the String if it is longer than specified Length.
